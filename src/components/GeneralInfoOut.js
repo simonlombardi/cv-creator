@@ -1,25 +1,33 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
+import LanguageOut from './LanguageOut'
 
-function GeneralInfoOut( {generalInfo} ) {
-    /* const [data, setData] = useState({})
+function GeneralInfoOut( {generalInfo, language} ) {
+  function formatDate(generalInfo){
+    let año = generalInfo.dateOfBirth.slice(0,4)
+    let mes = generalInfo.dateOfBirth.slice(5,7)
+    let dia = generalInfo.dateOfBirth.slice(8,)
+    let date = `${dia}/${mes}/${año}`
+    return date
+  }
 
-    useEffect(() => {
-        setData({...generalInfo})
-        console.log(data)
-    }, [generalInfo]) */
-    console.log(generalInfo)
   return (
-    <div className='container-output'>
-        <div className='name-output'>
-            {generalInfo.name}
-            {generalInfo.email}
-            {generalInfo.tel}
-            {generalInfo.dateOfBirth}
-
-            
-        
+    <>
+      <div className='header-output'>
+          <span className='name'>{(generalInfo.name).toUpperCase()}</span>
+          <span className='title'>{(generalInfo.title).toLowerCase()}</span>
+      </div>
+      <div className='vertical-output'>
+        <div className='general-info-output'>
+          <h4>GENERAL INFORMATION</h4>
+          <span>{generalInfo.name}</span>
+          <span>{formatDate(generalInfo)}</span> 
+          <span>{generalInfo.city}</span>
         </div>
-    </div>
+        <div>
+          <LanguageOut language={language} />
+        </div>
+      </div>
+    </>
   )
 }
 
